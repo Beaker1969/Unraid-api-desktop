@@ -1,0 +1,285 @@
+cards:
+  - cards:
+      - hold_action:
+          action: none
+        image: /local/server.jpg
+        tap_action:
+          action: none
+        type: picture
+      - align: split
+        card_style:
+          border-radius: 5px
+        columns: 2
+        entities:
+          - entity: sensor.glances_used_percent
+            max: 100
+            title: Disk
+          - entity: sensor.glances_cpu_used
+            max: 100
+            title: CPU
+        padding: 2px
+        severity:
+          - color: '#3bb3ee'
+            value: 50
+          - color: '#e7a24a'
+            value: 80
+          - color: '#ff0000'
+            value: 100
+        show_icon: true
+        type: 'custom:bar-card'
+      - align: split
+        card_style:
+          border-radius: 5px
+        columns: 2
+        entities:
+          - entity: sensor.glances_ram_used_percent
+            max: 100
+            title: RAM
+          - entity: sensor.glances_swap_used_percent
+            max: 100
+            title: SWAP
+        padding: 2px
+        severity:
+          - color: '#3bb3ee'
+            value: 50
+          - color: '#e7a24a'
+            value: 80
+          - color: '#ff0000'
+            value: 100
+        show_icon: true
+        type: 'custom:bar-card'
+      - align: split
+        card_style:
+          border-radius: 5px
+        columns: 2
+        entities:
+          - entity: sensor.glances_containers_ram_used
+            title: Docker RAM
+          - entity: sensor.glances_containers_cpu_used
+            max: 100
+            title: Docker CPU
+        padding: 2px
+        severity:
+          - color: '#3bb3ee'
+            value: 50
+          - color: '#e7a24a'
+            value: 80
+          - color: '#ff0000'
+            value: 100
+        show_icon: true
+        type: 'custom:bar-card'
+      - align: split
+        card_style:
+          border-radius: 5px
+        columns: 1
+        entities:
+          - entity: sensor.glances_containers_active
+            max: 100
+            title: Dockers Active
+        padding: 4px
+        severity:
+          - color: '#3bb3ee'
+            value: 50
+          - color: '#e7a24a'
+            value: 80
+          - color: '#ff0000'
+            value: 100
+        show_icon: true
+        type: 'custom:bar-card'
+    type: vertical-stack
+  - cards:
+      - cards:
+          - entities:
+              - entity: sensor.panther_cpu
+            show_icon: false
+            type: glance
+          - entities:
+              - entity: sensor.panther_memory
+            show_icon: false
+            type: glance
+          - entities:
+              - entity: sensor.panther_motherboard
+            show_icon: false
+            type: glance
+          - entities:
+              - entity: sensor.panther_arraystatus
+            show_icon: false
+            type: glance
+          - entities:
+              - entity: sensor.panther_diskspace
+            show_icon: false
+            type: glance
+          - entities:
+              - entity: switch.panther_array
+            show_header_toggle: false
+            type: entities
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - align: split
+            card_style:
+              border-radius: 5px
+            columns: 2
+            entities:
+              - entity: sensor.glances_core_0_temp
+                max: 100
+                title: CPU
+              - entity: sensor.glances_core_1_temp
+                max: 100
+                title: CPU
+            padding: 2px
+            severity:
+              - color: '#3bb3ee'
+                value: 50
+              - color: '#e7a24a'
+                value: 80
+              - color: '#ff0000'
+                value: 100
+            show_icon: true
+            type: 'custom:bar-card'
+        type: vertical-stack
+      - cards:
+          - align: split
+            card_style:
+              border-radius: 5px
+            columns: 2
+            entities:
+              - entity: sensor.glances_core_2_temp
+                max: 100
+                title: CPU
+              - entity: sensor.glances_core_3_temp
+                max: 100
+                title: CPU
+            padding: 2px
+            severity:
+              - color: '#3bb3ee'
+                value: 50
+              - color: '#e7a24a'
+                value: 80
+              - color: '#ff0000'
+                value: 100
+            show_icon: true
+            type: 'custom:bar-card'
+        type: vertical-stack
+      - entity: sensor.glances_intel5500_1_temp
+        max: 110
+        min: 0
+        name: Northbridge
+        severity:
+          green: 50
+          red: 90
+          yellow: 75
+        theme: default
+        type: gauge
+      - cards:
+          - card:
+              head:
+                label: Docker Control
+                type: section
+              type: 'custom:fold-entity-row'
+            filter:
+              exclude:
+                - entity_id: panther_docker_*_usb*
+              include:
+                - entity_id: switch.panther_docker_*
+            type: 'custom:auto-entities'
+          - card:
+              head:
+                label: Virtual Machine Control
+                type: section
+              type: 'custom:fold-entity-row'
+            filter:
+              exclude:
+                - entity_id: panther_vm_*_usb*
+              include:
+                - entity_id: switch.panther_vm_*
+            type: 'custom:auto-entities'
+          - card:
+              head:
+                label: Virtual Machine USB Control
+                type: section
+              type: 'custom:fold-entity-row'
+            filter:
+              include:
+                - entity_id: switch.panther_vm_*_usb*
+            type: 'custom:auto-entities'
+        type: vertical-stack
+    type: vertical-stack
+  - cards:
+      - cards:
+          - cards:
+              - image: /local/Kodidark.png
+                type: picture
+              - cards:
+                  - entities:
+                      - switch.panther_vm_kodi
+                    show_header_toggle: false
+                    type: entities
+                  - entities:
+                      - entity: sensor.panther_vm_kodi_status
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_kodi_core
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_kodi_ram
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_kodi_primarygpu
+                    show_icon: false
+                    type: glance
+                type: vertical-stack
+            type: horizontal-stack
+          - card:
+              head:
+                label: USB Devices
+                type: section
+              type: 'custom:fold-entity-row'
+            filter:
+              include:
+                - entity_id: switch.panther_vm_kodi_usb_*
+            type: 'custom:auto-entities'
+        title: Kodi VM
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - image: /local/windows10.png
+                type: picture
+              - cards:
+                  - entities:
+                      - switch.panther_vm_windows_10
+                    show_header_toggle: false
+                    type: entities
+                  - entities:
+                      - entity: sensor.panther_vm_windows_10_status
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_win10_core
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_win10_ram
+                    show_icon: false
+                    type: glance
+                  - entities:
+                      - entity: sensor.vm_win10_primarygpu
+                    show_icon: false
+                    type: glance
+                type: vertical-stack
+            type: horizontal-stack
+          - card:
+              head:
+                label: USB Devices
+                type: section
+              type: 'custom:fold-entity-row'
+            filter:
+              include:
+                - entity_id: switch.panther_vm_kodi_usb_*
+            type: 'custom:auto-entities'
+        title: Windows 10 VM
+        type: 'custom:vertical-stack-in-card'
+    type: vertical-stack
+type: horizontal-stack
